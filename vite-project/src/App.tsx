@@ -45,41 +45,49 @@ function App() {
 
   return (
     <>
-    <div>
-      <input type="text"  value={search} onChange={writeOnSearch}/>
-      <select value={count} onChange={(e)=>handleListCount(e)} name="" id="">
-        <option value="All">All</option>
-        <option value="5">5</option>
-        <option value="15">15</option>
-        <option value="25">25</option>
-      </select>
-      <div class="grid grid-cols-3 gap-4">
-      {
-        
-        data.map((products,key)=>(
-          <>
-          
-              <div key={key} >
-                <img
-                style={{height:200,width:200,alignItems:'center'}} 
-                src={products.image}
-                 alt="" /> 
-                  <h2>{products.title}</h2>
-                  <p>{products.price}</p>
-                  <p>{products.category}</p>
-                    
+  <div className="p-6 max-w-6xl mx-auto">
+    {/* Search Input */}
+    <input
+      type="text"
+      value={search}
+      onChange={writeOnSearch}
+      placeholder="Search products..."
+      className="border border-gray-300 rounded px-4 py-2 mb-4 w-full"
+    />
 
-              </div>
-              
-              </>
-        ))
-        
-      }
-      <button ></button>
-      </div>
-      </div>
-       
-    </>
+    {/* Dropdown */}
+    <select
+      value={count}
+      onChange={handleListCount}
+      className="border border-gray-300 rounded px-4 py-2 mb-4 w-full"
+    >
+      <option value="All">All</option>
+      <option value="5">5</option>
+      <option value="15">15</option>
+      <option value="25">25</option>
+    </select>
+
+    {/* Product Grid */}
+    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+      {data.map((product, index) => (
+        <div
+          key={index}
+          className="border rounded shadow hover:shadow-lg transition p-4 flex flex-col items-center"
+        >
+          <img
+            src={product.image}
+            alt={product.title}
+            className="h-48 w-48 object-contain mb-4"
+          />
+          <h2 className="font-semibold text-lg text-center mb-2">{product.title}</h2>
+          <p className="text-green-600 font-bold mb-1">${product.price}</p>
+          <p className="text-sm text-gray-600">{product.category}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</>
+
   )
 }
 
